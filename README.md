@@ -4,8 +4,15 @@
 
 ## Method Used
 
-- String-based scanning for DataModel-related identifiers
-- Scene/Rendering object detection to find RenderView objects which point to the DataModel
-- Workspace object scanning to find instances that are children of the DataModel
+- Fast string pattern scanning for graphics-related identifiers ("Graphics" and "RenderView")
+- Direct traversal of pointer chains using known working offsets (FakeDataModel at 0x120, RealDataModel at 0x1B8)
+- Targeted memory scanning with reduced search ranges for optimal performance
+- Quick validation of found addresses with minimal verification steps
 
-When any strategy successfully locates a potential address, the program validates it by checking memory structure patterns and following pointer chains with specific offsets. Once validated, it traverses the memory hierarchy using predefined offsets to map out the complete DataModel structure and its child components. This multi-layered approach ensures robustness against Roblox updates by not relying on a single detection method.
+The core approach focuses on:
+- Finding the RenderView object through string pattern scanning
+- Accessing FakeDataModel at offset 0x120 from RenderView
+- Accessing RealDataModel at offset 0x1B8 from FakeDataModel
+- Validating the DataModel by checking for expected memory structures
+
+These offsets may need adjustment after major Roblox updates.
