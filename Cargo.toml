@@ -1,0 +1,20 @@
+[package]
+name = "sh3df"
+authors = ["bufferization"]
+version = "0.1.1"
+edition = "2021"
+description = "A tool to dump DataModel on Roblox using multi-strategy scanning"
+
+[dependencies]
+winapi = { version = "0.3", features = [
+    "winuser",
+    "wincon",
+    "processthreadsapi",
+    "processenv",
+    "tlhelp32",
+    "handleapi",
+    "memoryapi",
+    "consoleapi",
+    "winbase"
+] }
+termcolor = "1.4.0"
